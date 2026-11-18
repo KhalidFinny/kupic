@@ -220,7 +220,7 @@ func (a *app) headline() string {
 		if a.registered() {
 			return a.camera
 		}
-		return "Your Lumix"
+		return "Your camera"
 	}
 	if a.registered() {
 		return a.camera

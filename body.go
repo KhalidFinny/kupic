@@ -24,8 +24,8 @@ func (a *app) body(c *ui.Context) {
 		case a.err != "":
 			stateBlock(c, iconCamera, bad, "No camera yet", a.err, "Try again", a.scan)
 		default:
-			stateBlock(c, iconCamera, muted, "Bring your Lumix over",
-				"Turn the camera on and open [Wi-Fi] → [Wi-Fi Function] → [New Connection] → [Remote Shooting & View], then press Find my camera. With Bluetooth on, kupic can also wake the camera itself.",
+			stateBlock(c, iconCamera, muted, "Bring your camera over",
+				"Turn the camera's Wi-Fi on, then press Find my camera. On a Lumix that is [Wi-Fi] → [Wi-Fi Function] → [New Connection] → [Remote Shooting & View]. With Bluetooth on, kupic can also wake the camera itself.",
 				"Find my camera", a.scan)
 		}
 	})
@@ -37,7 +37,7 @@ func (a *app) body(c *ui.Context) {
 // way.
 func (a *app) pairing(c *ui.Context) {
 	ui.Column(c).Fill().Gap(0).Padding(28, 22, 20, 22).Children(func() {
-		ui.Text(c, "Bring your Lumix over").FontSize(17).Bold().TextColor(text)
+		ui.Text(c, "Bring your camera over").FontSize(17).Bold().TextColor(text)
 		ui.Text(c, "Plug the camera in over USB, or reach it over Wi-Fi or Bluetooth.").
 			FontSize(12).TextColor(muted)
 		ui.Box(c).Height(16)

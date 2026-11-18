@@ -1,17 +1,42 @@
 # kupic
 
-Pulls photos off a Panasonic Lumix camera straight to your computer, over USB
-from the card it mounts as, or over Wi-Fi. Built for the Lumix DC-G100D, as a
-native desktop app that also runs on a phone.
+Pulls photos off a camera that brings its own Wi-Fi, straight to your
+computer or phone, without the maker's app. Native UI, no browser, no account.
+
+Any camera that serves its card over its own Wi-Fi belongs here. kupic is
+written and tested against a **Panasonic Lumix G100D** today; see
+[Which cameras](#which-cameras).
 
 ![kupic showing a camera's card as a grid](docs/screenshot.png)
 
+## Which cameras
+
+kupic talks to a camera the way mirrorless cameras expect to be talked to: the
+camera starts its own Wi-Fi network or joins yours, and serves its card over
+UPnP. That shape is common. The protocol on top of it is not: every maker
+speaks its own, and the maker's app is usually the only client.
+
+| | Today |
+|---|---|
+| Works, tested | Panasonic Lumix G100D |
+| Should work | Other Lumix bodies over the same `cam.cgi` interface |
+| Not yet | Canon, Sony, Nikon, Fujifilm, Olympus. Each needs its own session and listing code. |
+
+Nothing in kupic pretends otherwise: it looks for Lumix cameras, and its Wi-Fi
+protocol is Panasonic's. Supporting another maker means adding that maker's
+protocol behind the same interface, which is one package, not a rewrite. The
+app does not claim a camera it has not been run against.
+
 ## Why
 
-Panasonic's own tools are Windows-only, and LUMIX Sync on a phone is slow and
-unreliable: the Bluetooth pairing drops, connecting is fiddly, and choosing
-what to send is worse than a file dialog. kupic does the one job that matters,
-get the photos off the card, with a grid you can actually use.
+It started with a Lumix G100D. Panasonic's own tools are Windows-only, and
+LUMIX Sync on a phone is slow and unreliable: the Bluetooth pairing drops,
+connecting is fiddly, and choosing what to send is worse than a file dialog.
+kupic does the one job that matters, get the photos off the card, with a grid
+you can actually use.
+
+The same complaint applies to most camera apps, which is why the shape of
+kupic is not Lumix-shaped: a card is a card.
 
 ## What it does
 
@@ -22,8 +47,9 @@ get the photos off the card, with a grid you can actually use.
 - **Or reaches the camera over Wi-Fi.** Press *Connect over Wi-Fi* and kupic
   joins the camera's own network through NetworkManager, then lists the card.
   A camera in [Via Network] mode is found on your own network instead.
-- **Or pairs it over Bluetooth, like LUMIX Sync.** Press *Find cameras* and
-  kupic scans, lists the Lumix cameras it finds, and pairs the one you pick.
+- **Or pairs it over Bluetooth.** Press *Find cameras* and kupic scans, lists
+  the cameras it finds, and pairs the one you pick, registering itself on the
+  camera the way the maker's app does.
 - **Shows the card as a grid.** Thumbnails, multi-select, keyboard navigation.
 - **Imports what you choose.** Copy the camera's own JPEG as-is, or convert to
   **PNG** or **WebP** with `ffmpeg`, at a quality you set. The RAW (`.RW2`)
@@ -88,6 +114,10 @@ To check the Bluetooth path on its own:
 ```
 
 ## How it talks to the camera
+
+What follows is the Lumix implementation, which is what kupic ships. Another
+maker's camera would bring its own version of the middle two sections; the
+USB read and the import are the same for any camera.
 
 The protocols are undocumented. kupic follows the reverse-engineering in
 `cleverfox/lumixproto`, `njfdev/liblumix` and `palmdalian/python_lumix_control`
@@ -165,6 +195,10 @@ but finds no camera yet.
 
 ## Not yet
 
+- **Cameras that are not Lumix.** The protocol layer is one package, so another
+  maker's camera is that package's second implementation, not a rewrite. It is
+  not written yet, and kupic does not claim to read a camera it has not been
+  run against.
 - **Finding a camera on a phone.** The Wi-Fi path would work there, given a
   platform network API in place of `nmcli`.
 - Deleting from the camera.

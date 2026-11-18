@@ -1,8 +1,16 @@
 # kupic — Project Conventions
 
-A native Linux desktop app that pulls photos off a Panasonic Lumix camera —
-over USB from the card it mounts as, or over Wi-Fi. Built with
-[MyGo](https://mygo.egoist.dev/) native UI.
+A native desktop and phone app that pulls photos off a camera that brings its
+own Wi-Fi, over USB from the card it mounts as or over that network, without
+the maker's app. Built with [MyGo](https://mygo.egoist.dev/) native UI.
+
+**What it is for, and what it is not.** The category is any camera that serves
+its card over its own Wi-Fi. The implementation is Panasonic's: kupic is
+written and tested against a Lumix G100D, and `internal/camera` speaks
+`cam.cgi`. Do not claim another maker in the README or the interface until it
+has been run against that camera. Adding one means a second implementation
+behind `camera.Client`, which is why the protocol stays isolated in one
+package.
 
 ## What kupic is (do not re-derive)
 
