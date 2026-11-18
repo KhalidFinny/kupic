@@ -1,0 +1,24 @@
+# Build output
+build/
+.mygo/
+kupic
+
+# Working notes: handoff and progress are for the person, not the repo
+handoff.md
+progress.md
+
+# Agent tooling. AGENTS.md stays: it is the project's own conventions.
+.amp/
+.agents/
+.claude/
+.cursor/
+.codex/
+.aider*
+.gemini/
+opencode.json
+*.amp-thread
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

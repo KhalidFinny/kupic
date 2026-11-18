@@ -1,0 +1,13 @@
+{
+  "name": "kupic",
+  "identifier": "com.khalidfinny.kupic",
+  "version": "0.1.0",
+  "out": "build",
+  "android": {
+    "adaptiveIcon": {
+      "foreground": "resources/icon-foreground.png",
+      "background": "#0B0B0C"
+    },
+    "splash": "#0B0B0C"
+  }
+}
